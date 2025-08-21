@@ -61,6 +61,13 @@ from .frameworks.pytorch import (
     DistributedDebugger,
     auto_distributed_debug,
 )
+# Capture and comparison utilities
+from .capture import (
+    capture_forward_pass,
+    load_capture_any,
+    compare_captures,
+)
+
 
 __all__ = [
     # Core utilities
@@ -128,4 +135,9 @@ __all__ = [
     # Distributed utilities
     "DistributedDebugger",
     "auto_distributed_debug",
+    
+    # Capture and comparison utilities
+    "capture_forward_pass",
+    "load_capture_any",
+    "compare_captures",
 ]
