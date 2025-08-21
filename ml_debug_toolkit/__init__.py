@@ -63,9 +63,12 @@ from .frameworks.pytorch import (
 )
 # Capture and comparison utilities
 from .capture import (
+    capture_forward_pass_non_streaming,
     capture_forward_pass,
+    compare_captures_streaming,
     load_capture_any,
     compare_captures,
+    summarize_compare_csv,
 )
 
 
@@ -137,7 +140,10 @@ __all__ = [
     "auto_distributed_debug",
     
     # Capture and comparison utilities
+    "capture_forward_pass_non_streaming",
     "capture_forward_pass",
+    "compare_captures_streaming",
     "load_capture_any",
     "compare_captures",
+    "summarize_compare_csv",
 ]
