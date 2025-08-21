@@ -1,0 +1,140 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ml-debug-toolkit"
+version = "0.1.0"
+description = "Comprehensive debugging and troubleshooting toolkit for ML frameworks"
+readme = "README.md"
+license = {text = "GPL-3.0"}
+authors = [
+    {name = "ML Debug Toolkit Contributors"}
+]
+maintainers = [
+    {name = "ML Debug Toolkit Contributors"}
+]
+keywords = [
+    "debugging", "ml", "pytorch", "huggingface", "triton", "cuda", 
+    "transformers", "machine learning", "deep learning", "profiling"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Debuggers",
+    "Topic :: Software Development :: Testing",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=1.12.0",
+    "numpy>=1.21.0",
+    "pandas>=1.3.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.11.0",
+    "tqdm>=4.62.0",
+    "psutil>=5.8.0",
+    "rich>=12.0.0",
+    "click>=8.0.0",
+    "pyyaml>=6.0",
+    "jsonschema>=4.0.0",
+    "nbformat>=5.4.0",
+    "nbconvert>=6.5.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+    "py-cpuinfo>=8.0.0",
+    "astor>=0.8.1",
+    "scipy>=1.7.0",
+]
+
+[project.optional-dependencies]
+huggingface = [
+    "transformers>=4.20.0",
+    "datasets>=2.0.0",
+    "accelerate>=0.20.0",
+    "peft>=0.3.0",
+    "trl>=0.4.0",
+    "huggingface-hub>=0.15.0",
+]
+cuda = [
+    "pynvml>=11.4.0",
+    "py3nvml>=0.2.7", 
+    "nvidia-ml-py>=11.495.46",
+]
+distributed = [
+    "torch>=1.12.0",  # For distributed training support
+]
+triton = [
+    "triton>=2.0.0",
+]
+quantization = [
+    "bitsandbytes>=0.39.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "isort>=5.10.0",
+    "flake8>=5.0.0",
+    "mypy>=0.991",
+    "pre-commit>=2.20.0",
+    "sphinx>=5.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+]
+all = [
+    "ml-debug-toolkit[huggingface,cuda,triton,quantization,distributed]"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/ml-debug-toolkit"
+Documentation = "https://ml-debug-toolkit.readthedocs.io"
+Repository = "https://github.com/yourusername/ml-debug-toolkit"
+"Bug Tracker" = "https://github.com/yourusername/ml-debug-toolkit/issues"
+
+[project.scripts]
+ml-debug = "ml_debug_toolkit.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ml_debug_toolkit*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --cov=ml_debug_toolkit --cov-report=term-missing --cov-report=html"
